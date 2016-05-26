@@ -19,7 +19,21 @@ class FieldSet extends FormElement {
 
     public function addElement($element) {
         $this->elements[] = $element;
+        return $this;
     }
+    
+    public function delElement($index)
+    {
+        if (key_exists($index, $this->elements)){
+            unset($this->elements[$index]);
+        }
+        return $this;
+    }    
+    
+    public function reindexElements()
+    {
+        $this->elements = array_values($this->elements);
+    }    
 
     public function setElements(array $elements) {
         $this->elements = $elements;

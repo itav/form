@@ -18,26 +18,26 @@ class Input extends FormElement
     const TYPE_IMAGE = 'image';
     const TYPE_BUTTON = 'button';
 
-    private $label;
-    private $type;
-    private $name;
-    private $value;
-    private $checked;
-    private $disabled;
-    private $readonly;
-    private $size;
-    private $maxlength;
-    private $src;
-    private $alt;
-    private $usemap;
-    private $ismap;
-    private $tabindex;
-    private $accesskey;
-    private $onfocus;
-    private $onblur;
-    private $onselect;
-    private $onchange;
-    private $accept;
+    protected $label;
+    protected $type;
+    protected $name;
+    protected $value;
+    protected $checked;
+    protected $disabled;
+    protected $readonly;
+    protected $size;
+    protected $maxlength;
+    protected $src;
+    protected $alt;
+    protected $usemap;
+    protected $ismap;
+    protected $tabindex;
+    protected $accesskey;
+    protected $onfocus;
+    protected $onblur;
+    protected $onselect;
+    protected $onchange;
+    protected $accept;
 
     public function __construct($label = null,  $name = null, $type = self::TYPE_TEXT, $value = null)
     {

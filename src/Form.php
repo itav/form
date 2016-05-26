@@ -118,13 +118,76 @@ class Form extends FormElement
 
     public function addElement($element)
     {
+        if ($element instanceof \Itav\Component\Form\Form) {
+            foreach ($element->getElements() as $element) {
+                $this->elements[] = $element;
+            }
+            return $this;
+        }
         $this->elements[] = $element;
+        return $this;
+    }
+
+    public function delElement($index)
+    {
+        if (key_exists($index, $this->elements)) {
+            unset($this->elements[$index]);
+        }
+        
+        return $this;
+    }
+    
+    public function reindexElements()
+    {
+        $this->elements = array_values($this->elements);
     }
 
     public function setElements($elements)
     {
-        $this->elements = $elements;
+        if (!is_array($elements)) {
+            return $this;
+        }
+        if (count($elements) <= 0) {
+            return $this;
+        }
+        foreach ($elements as $element) {
+            if ($element instanceof \Itav\Component\Form\Form) {
+                foreach ($element->getElements() as $element) {
+                    $this->elements[] = $element;
+                }
+            } else {
+                $this->elements[] = $element;
+            }
+        }
         return $this;
+    }
+
+    public function removeSubmits()
+    {
+        $this->deleteSubmits($this);
+    }
+
+    private function deleteSubmits($obj)
+    {
+        $elements = $obj->getElements();
+        if (!is_array($elements)) {
+            return;
+        }
+        if (count($elements) <= 0) {
+            return;
+        }
+        foreach ($elements as $key => $element) {
+            if (($element instanceof \Itav\Component\Form\Input) && ($element->getType() === Input::TYPE_SUBMIT)) {
+                $obj->delElement($key);
+            }
+            if (isset($element) && ($element instanceof \Itav\Component\Form\Button) && ($element->getType() === Button::TYPE_SUBMIT)) {
+                $obj->delElement($key);
+            }
+            if( isset($element) && ($element instanceof \Itav\Component\Form\FieldSet)){
+                $this->deleteSubmits($element);
+            }
+        }
+        $obj->reindexElements();
     }
 
 }

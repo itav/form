@@ -25,9 +25,10 @@ class Button extends FormElement {
         $this->label = $label;
         $this->name = $name;
         $this->id = $name;
-        $this->type = $type;
+        $this->type = ($type) ? $type : self::TYPE_SUBMIT;
         $this->value = $value;
-        $this->label = ($label) ? $label : $name;
+        $this->label = ($label) ? $label : (($name) ? $name : $this->type);
+        $this->template = 'button.php';
         
     }
 
