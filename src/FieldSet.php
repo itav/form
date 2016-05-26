@@ -6,11 +6,12 @@ use Itav\Component\Form\FormElement;
 
 class FieldSet extends FormElement {
 
-    /**
-     *
-     * @var  
-     */
     private $elements = [];
+    
+    public function __construct()
+    {
+        $this->template = 'fieldset.php';
+    }
 
     public function getElements() {
         return $this->elements;

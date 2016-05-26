@@ -14,6 +14,12 @@ class OptGroup extends FormElement
      * @var Option[]
      */
     private $options = [];
+    
+    public function __construct($label = null, $options = null) {
+        $this->label = $label;
+        $this->options = $options;
+        $this->template = 'optgroup.php';
+    }    
 
 
     public function isDisabled() {

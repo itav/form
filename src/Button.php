@@ -20,12 +20,15 @@ class Button extends FormElement {
     private $onfocus;
     private $onblur;
 
-    public function __construct($type = self::TYPE_BUTTON, $name = null, $value = null, $label = null) {
+    public function __construct($label = null, $name = null, $type = self::TYPE_BUTTON,  $value = null) {
 
-        $this->type = $type;
+        $this->label = $label;
         $this->name = $name;
+        $this->id = $name;
+        $this->type = $type;
         $this->value = $value;
         $this->label = ($label) ? $label : $name;
+        
     }
 
     public function getName() {

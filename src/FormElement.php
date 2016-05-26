@@ -8,7 +8,8 @@ class FormElement {
     protected $class;
     protected $attributes;
     protected $template;
-
+    
+    
     public function getId() {
         return $this->id;
     }

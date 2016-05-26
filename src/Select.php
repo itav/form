@@ -20,6 +20,14 @@ class Select extends FormElement {
      * @var Option[]
      */
     private $options;
+    
+    public function __construct($label = null, $name = null, $options = null) {
+        $this->label = $label;
+        $this->name = $name;
+        $this->options = $options;
+        $this->id = $name;
+        $this->template = 'select.php';
+    }    
 
     public function getName() {
         return $this->name;

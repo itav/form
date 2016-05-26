@@ -17,6 +17,15 @@ class TextArea extends FormElement {
     private $onblur;
     private $onselect;
     private $onchange;
+    
+    public function __construct($label = null, $name = null, $value = null) {
+        $this->label = $label;
+        $this->name = $name;
+        $this->value = $value;
+        $this->id = $name;
+        $this->template = 'textarea.php';
+    }
+    
 
     public function getName() {
         return $this->name;

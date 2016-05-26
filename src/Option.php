@@ -11,10 +11,11 @@ class Option extends FormElement {
     private $selected;
     private $disabled;
 
-    public function __construct($label = '', $value = null, $selected = false) {
-        $this->setLabel($label);
-        $this->setValue($value);
-        $this->setSelected($selected);
+    public function __construct($label = null, $value = null, $selected = false) {
+        $this->label = $label;
+        $this->value = $value;
+        $this->selected = $selected;
+        $this->template = 'option.php';
     }
 
     public function getLabel() {

@@ -4,7 +4,8 @@ namespace Itav\Component\Form;
 
 use Itav\Component\Form\FormElement;
 
-class Form extends FormElement {
+class Form extends FormElement
+{
 
     const METHOD_GET = 'get';
     const METHOD_POST = 'post';
@@ -20,83 +21,108 @@ class Form extends FormElement {
     private $acceptCharset;
     private $elements;
 
-    public function __construct() {
-        $this->template = 'view/form.php';
-        $this->method = self::METHOD_POST;
+    public function __construct($name = '', $action = null, $method = null)
+    {
+        if ($name) {
+            $this->name = $name;
+            $this->id = $name;
+        }
+        if ($action) {
+            $this->action = $action;
+        }
+        $this->template = 'form.php';
+        $this->method = $method ? $method : self::METHOD_POST;
     }
 
-    public function getMethod() {
+    public function getMethod()
+    {
         return $this->method;
     }
 
-    public function getAction() {
+    public function getAction()
+    {
         return $this->action;
     }
 
-    public function getEnctype() {
+    public function getEnctype()
+    {
         return $this->enctype;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getOnSubmit() {
+    public function getOnSubmit()
+    {
         return $this->onSubmit;
     }
 
-    public function getOnReset() {
+    public function getOnReset()
+    {
         return $this->onReset;
     }
 
-    public function getAcceptCharset() {
+    public function getAcceptCharset()
+    {
         return $this->acceptCharset;
     }
 
-    public function setMethod($method) {
+    public function setMethod($method)
+    {
         $this->method = $method;
         return $this;
     }
 
-    public function setAction($action) {
+    public function setAction($action)
+    {
         $this->action = $action;
         return $this;
     }
 
-    public function setEnctype($enctype) {
+    public function setEnctype($enctype)
+    {
         $this->enctype = $enctype;
         return $this;
     }
 
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
         return $this;
     }
 
-    public function setOnSubmit($onSubmit) {
+    public function setOnSubmit($onSubmit)
+    {
         $this->onSubmit = $onSubmit;
         return $this;
     }
 
-    public function setOnReset($onReset) {
+    public function setOnReset($onReset)
+    {
         $this->onReset = $onReset;
         return $this;
     }
 
-    public function setAcceptCharset($acceptCharset) {
+    public function setAcceptCharset($acceptCharset)
+    {
         $this->acceptCharset = $acceptCharset;
         return $this;
     }
 
-    public function getElements() {
+    public function getElements()
+    {
         return $this->elements;
     }
 
-    public function addElement($element) {
+    public function addElement($element)
+    {
         $this->elements[] = $element;
     }
 
-    public function setElements($elements) {
+    public function setElements($elements)
+    {
         $this->elements = $elements;
         return $this;
     }
