@@ -7,6 +7,7 @@ use Itav\Component\Form\FormElement;
 class TextArea extends FormElement {
 
     private $name;
+    private $label;
     private $rows;
     private $cols;
     private $disabled;
