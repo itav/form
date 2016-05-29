@@ -6,8 +6,8 @@ use Itav\Component\Form\FormElement;
 
 class TextArea extends FormElement {
 
-    private $name;
     private $label;
+    private $name;
     private $rows;
     private $cols;
     private $disabled;
@@ -27,6 +27,16 @@ class TextArea extends FormElement {
         $this->template = 'textarea.php';
     }
     
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    public function setLabel($label)
+    {
+        $this->label = $label;
+        return $this;
+    }
 
     public function getName() {
         return $this->name;
