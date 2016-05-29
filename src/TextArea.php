@@ -8,6 +8,7 @@ class TextArea extends FormElement {
 
     private $label;
     private $name;
+    private $value;
     private $rows;
     private $cols;
     private $disabled;
@@ -40,6 +41,17 @@ class TextArea extends FormElement {
 
     public function getName() {
         return $this->name;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+        return $this;
     }
 
     public function getRows() {
