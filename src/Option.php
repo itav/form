@@ -15,7 +15,7 @@ class Option extends FormElement {
         $this->label = $label;
         $this->value = $value;
         $this->selected = $selected;
-        $this->template = 'option.php';
+        $this->template = 'option.tpl';
     }
 
     public function getLabel() {

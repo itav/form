@@ -25,7 +25,7 @@ class TextArea extends FormElement {
         $this->name = $name;
         $this->value = $value;
         $this->id = $name;
-        $this->template = 'textarea.php';
+        $this->template = 'textarea.tpl';
     }
     
     public function getLabel()

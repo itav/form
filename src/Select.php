@@ -26,7 +26,7 @@ class Select extends FormElement {
         $this->name = $name;
         $this->options = $options;
         $this->id = $name;
-        $this->template = 'select.php';
+        $this->template = 'select.tpl';
     }    
 
     public function getName() {

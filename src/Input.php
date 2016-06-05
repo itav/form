@@ -46,7 +46,7 @@ class Input extends FormElement
         $this->type = $type;
         $this->value = $value;
         $this->id = $name;
-        $this->template = 'input.php';
+        $this->template = 'input.tpl';
     }
     
     public function getLabel()

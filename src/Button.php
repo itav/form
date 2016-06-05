@@ -28,7 +28,7 @@ class Button extends FormElement {
         $this->type = ($type) ? $type : self::TYPE_SUBMIT;
         $this->value = $value;
         $this->label = ($label) ? $label : (($name) ? $name : $this->type);
-        $this->template = 'button.php';
+        $this->template = 'button.tpl';
         
     }
 

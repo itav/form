@@ -30,7 +30,7 @@ class Form extends FormElement
         if ($action) {
             $this->action = $action;
         }
-        $this->template = 'form.php';
+        $this->template = 'form.tpl';
         $this->method = $method ? $method : self::METHOD_POST;
     }
 

@@ -10,7 +10,7 @@ class FieldSet extends FormElement {
     
     public function __construct()
     {
-        $this->template = 'fieldset.php';
+        $this->template = 'fieldset.tpl';
     }
 
     public function getElements() {
