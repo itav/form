@@ -116,13 +116,18 @@ class Form extends FormElement
         return $this->elements;
     }
 
-    public function addElement($element)
+    public function addElement($element, $index = null)
     {
+        //Add form to form
         if ($element instanceof \Itav\Component\Form\Form) {
             foreach ($element->getElements() as $element) {
                 $this->elements[] = $element;
             }
             return $this;
+        }
+        if($index){
+            $this->elements[$index] = $element;
+            return $this;            
         }
         $this->elements[] = $element;
         return $this;
@@ -130,7 +135,7 @@ class Form extends FormElement
 
     public function delElement($index)
     {
-        if (key_exists($index, $this->elements)) {
+        if (array_key_exists($index, $this->elements)) {
             unset($this->elements[$index]);
         }
         
