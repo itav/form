@@ -165,6 +165,7 @@ class Form extends FormElement
     public function removeSubmits()
     {
         $this->deleteSubmits($this);
+        return $this;
     }
 
     private function deleteSubmits($obj)
