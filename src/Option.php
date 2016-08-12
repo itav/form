@@ -2,8 +2,6 @@
 
 namespace Itav\Component\Form;
 
-use Itav\Component\Form\FormElement;
-
 class Option extends FormElement {
 
     private $label;

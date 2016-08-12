@@ -2,8 +2,6 @@
 
 namespace Itav\Component\Form;
 
-use Itav\Component\Form\FormElement;
-
 class TextArea extends FormElement {
 
     private $label;
@@ -19,6 +17,8 @@ class TextArea extends FormElement {
     private $onblur;
     private $onselect;
     private $onchange;
+    private $templateLabel;
+    private $templateWidget;
     
     public function __construct($label = null, $name = null, $value = null) {
         $this->label = $label;
@@ -26,6 +26,8 @@ class TextArea extends FormElement {
         $this->value = $value;
         $this->id = $name;
         $this->template = 'textarea.tpl';
+        $this->templateLabel = 'label.tpl';
+        $this->templateWidget = 'input_widget.tpl';
     }
     
     public function getLabel()

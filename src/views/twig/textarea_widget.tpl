@@ -1,6 +1,3 @@
-{% if data.label and data.name %}
-    <label for="{{ data.name }}">{{ data.label }}</label>
-{% endif %}
 <textarea {{ include('formelement.tpl') }}
 {% if data.name %} name="{{data.name}}" {% endif %}
 {% if data.disabled %} disabled="disabled" {% endif %}

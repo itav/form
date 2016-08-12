@@ -1,4 +1,5 @@
 /nbproject/
 /vendor/
 /test/
+.idea/
 composer.lock

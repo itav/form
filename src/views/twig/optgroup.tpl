@@ -1,4 +1,4 @@
-<optgroup {{include('formelement.twig')}} 
+<optgroup {{include('formelement.tpl')}}
     label="{{data.label}}" 
     {% if data.disabled %} disabled="disabled" {%endif%}> 
     {% for option in data.options %}

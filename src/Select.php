@@ -2,8 +2,6 @@
 
 namespace Itav\Component\Form;
 
-use Itav\Component\Form\FormElement;
-
 class Select extends FormElement {
 
     private $name;
@@ -14,6 +12,8 @@ class Select extends FormElement {
     private $onfocus;
     private $onblur;
     private $onchange;
+    private $templateLabel;
+    private $templateWidget;
 
     /**
      *
@@ -27,6 +27,8 @@ class Select extends FormElement {
         $this->options = $options;
         $this->id = $name;
         $this->template = 'select.tpl';
+        $this->templateLabel = 'label.tpl';
+        $this->templateWidget = 'input_widget.tpl';
     }    
 
     public function getName() {

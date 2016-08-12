@@ -7,7 +7,7 @@ class FormElement {
     protected $id;
     protected $class;
     protected $attributes;
-    protected $template;
+    protected $template = 'formelement.tpl';
     
     
     public function getId() {

@@ -1,8 +1,0 @@
-{% if data.id is defined %} id="{{ data.id }}"{% endif %}
-{% if data.class is defined  %} class="{{ data.class }}"{% endif %}
-{% if data.attributes  is defined %}
-{% for key, value in data.attributes %}
- {{key}}="{{value}}" 
-{% endfor %}
-{% endif %}
-

@@ -2,8 +2,6 @@
 
 namespace Itav\Component\Form;
 
-use Itav\Component\Form\FormElement;
-
 class Input extends FormElement
 {
 
@@ -38,6 +36,8 @@ class Input extends FormElement
     private $onselect;
     private $onchange;
     private $accept;
+    private $templateLabel;
+    private $templateWidget;
 
     public function __construct($label = null,  $name = null, $type = self::TYPE_TEXT, $value = null)
     {
@@ -47,6 +47,8 @@ class Input extends FormElement
         $this->value = $value;
         $this->id = $name;
         $this->template = 'input.tpl';
+        $this->templateLabel = 'label.tpl';
+        $this->templateWidget = 'input_widget.tpl';
     }
     
     public function getLabel()

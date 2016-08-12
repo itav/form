@@ -2,8 +2,6 @@
 
 namespace Itav\Component\Form;
 
-use Itav\Component\Form\FormElement;
-
 class Button extends FormElement {
 
     const TYPE_SUBMIT = 'submit';

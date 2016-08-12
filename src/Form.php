@@ -2,11 +2,8 @@
 
 namespace Itav\Component\Form;
 
-use Itav\Component\Form\FormElement;
-
 class Form extends FormElement
 {
-
     const METHOD_GET = 'get';
     const METHOD_POST = 'post';
     const ENCTYPE_FILE = 'multipart/form-data';
@@ -20,6 +17,8 @@ class Form extends FormElement
     private $onReset;
     private $acceptCharset;
     private $elements;
+    private $templateOpen;
+    private $templateClose;
 
     public function __construct($name = '', $action = null, $method = null)
     {
@@ -31,6 +30,8 @@ class Form extends FormElement
             $this->action = $action;
         }
         $this->template = 'form.tpl';
+        $this->templateOpen = 'form_open.tpl';
+        $this->templateClose = 'form_close.tpl';
         $this->method = $method ? $method : self::METHOD_POST;
     }
 
@@ -119,15 +120,18 @@ class Form extends FormElement
     public function addElement($element, $index = null)
     {
         //Add form to form
-        if ($element instanceof \Itav\Component\Form\Form) {
-            foreach ($element->getElements() as $element) {
+        if ($element instanceof Form) {
+            foreach ($element->getElements() as $key => $element) {
+                if(!array_key_exists($key, $this->elements)){
+                    $this->elements[$key] = $element;
+                }
                 $this->elements[] = $element;
             }
             return $this;
         }
-        if($index){
+        if ($index) {
             $this->elements[$index] = $element;
-            return $this;            
+            return $this;
         }
         $this->elements[] = $element;
         return $this;
@@ -138,10 +142,10 @@ class Form extends FormElement
         if (array_key_exists($index, $this->elements)) {
             unset($this->elements[$index]);
         }
-        
+
         return $this;
     }
-    
+
     public function reindexElements()
     {
         $this->elements = array_values($this->elements);
@@ -156,9 +160,9 @@ class Form extends FormElement
             return $this;
         }
         foreach ($elements as $element) {
-            if ($element instanceof \Itav\Component\Form\Form) {
-                foreach ($element->getElements() as $element) {
-                    $this->elements[] = $element;
+            if ($element instanceof Form) {
+                foreach ($element->getElements() as $el) {
+                    $this->elements[] = $el;
                 }
             } else {
                 $this->elements[] = $element;
@@ -173,6 +177,9 @@ class Form extends FormElement
         return $this;
     }
 
+    /**
+     * @param Form | FieldSet $obj
+     */
     private function deleteSubmits($obj)
     {
         $elements = $obj->getElements();
@@ -183,17 +190,16 @@ class Form extends FormElement
             return;
         }
         foreach ($elements as $key => $element) {
-            if (($element instanceof \Itav\Component\Form\Input) && ($element->getType() === Input::TYPE_SUBMIT)) {
+            if (($element instanceof Input) && ($element->getType() === Input::TYPE_SUBMIT)) {
                 $obj->delElement($key);
             }
-            if (isset($element) && ($element instanceof \Itav\Component\Form\Button) && ($element->getType() === Button::TYPE_SUBMIT)) {
+            if (isset($element) && ($element instanceof Button) && ($element->getType() === Button::TYPE_SUBMIT)) {
                 $obj->delElement($key);
             }
-            if( isset($element) && ($element instanceof \Itav\Component\Form\FieldSet)){
+            if (isset($element) && ($element instanceof FieldSet)) {
                 $this->deleteSubmits($element);
             }
         }
         $obj->reindexElements();
     }
-
 }

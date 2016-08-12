@@ -2,9 +2,6 @@
 
 namespace Itav\Component\Form;
 
-use Itav\Component\Form\FormElement;
-use Itav\Component\Form\Option;
-
 class OptGroup extends FormElement
 {
     private $disabled;
