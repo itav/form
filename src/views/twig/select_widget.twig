@@ -1,0 +1,5 @@
+<select {{ include('formelement.twig') }} {% if data.name %}name="{{ data.name }}"{% endif %} {% if data.multiple is defined %} multiple="multiple" {% endif %} >
+    {% for option in data.options %}
+        {{ include(option.template, {data: option}, with_context = false) }}
+    {% endfor %}    
+</select>

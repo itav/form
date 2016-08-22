@@ -1,7 +1,7 @@
-{% if data.label and data.name %}
-    <label for="{{ data.name }}">{{ data.label }}</label>
-{% endif %}
-<input {{ include('formelement.tpl') }}
+<label {% if data.id is defined %} for="{{ data.id }}" {% elseif data.name is defined %} for="{{ data.name }}" {% endif %}>
+    {% if data.label is defined %} {{ data.label }}{% endif %}
+</label>
+<input {{ include('formelement.twig') }}
     {%if data.name%} name="{{data.name}}"{% endif %} 
     {%if data.type%} type="{{data.type}}"{% endif %} 
     {%if data.value%} value="{{data.value}}"{% endif %}

@@ -1,0 +1,7 @@
+<form {{include('formelement.twig')}}
+    {% if data.name is defined %} name="{{data.name}}" {% endif %}
+    {% if data.action is defined %} action="{{data.action}}" {% endif %}
+    {% if data.method is defined %} method="{{data.method}}" {% endif %}
+    {% if data.accept_charset is defined %} accept-charset="{{data.accept_charset}}" {% endif %}
+    {% if data.enctype is defined %} enctype="{{data.enctype}}" {% endif %}>
+

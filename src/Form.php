@@ -2,7 +2,7 @@
 
 namespace Itav\Component\Form;
 
-class Form extends FormElement
+class Form extends FormElement implements FormElementInterface, FormInterface
 {
     const METHOD_GET = 'get';
     const METHOD_POST = 'post';
@@ -12,11 +12,11 @@ class Form extends FormElement
     private $method;
     private $action;
     private $enctype;
-    private $name;
     private $onSubmit;
     private $onReset;
     private $acceptCharset;
-    private $elements;
+    /** @var FormElementInterface[] */
+    private $elements = [];
     private $templateOpen;
     private $templateClose;
 
@@ -29,9 +29,9 @@ class Form extends FormElement
         if ($action) {
             $this->action = $action;
         }
-        $this->template = 'form.tpl';
-        $this->templateOpen = 'form_open.tpl';
-        $this->templateClose = 'form_close.tpl';
+        $this->template = 'form.twig';
+        $this->templateOpen = 'form_open.twig';
+        $this->templateClose = 'form_close.twig';
         $this->method = $method ? $method : self::METHOD_POST;
     }
 
@@ -48,11 +48,6 @@ class Form extends FormElement
     public function getEnctype()
     {
         return $this->enctype;
-    }
-
-    public function getName()
-    {
-        return $this->name;
     }
 
     public function getOnSubmit()
@@ -88,12 +83,6 @@ class Form extends FormElement
         return $this;
     }
 
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
     public function setOnSubmit($onSubmit)
     {
         $this->onSubmit = $onSubmit;
@@ -112,11 +101,19 @@ class Form extends FormElement
         return $this;
     }
 
+    /**
+     * @return FormElementInterface[]
+     */
     public function getElements()
     {
         return $this->elements;
     }
 
+    /**
+     * @param FormElementInterface $element
+     * @param string $index
+     * @return $this
+     */
     public function addElement($element, $index = null)
     {
         //Add form to form
@@ -151,6 +148,10 @@ class Form extends FormElement
         $this->elements = array_values($this->elements);
     }
 
+    /**
+     * @param FormElementInterface[] $elements
+     * @return $this
+     */
     public function setElements($elements)
     {
         if (!is_array($elements)) {
@@ -178,6 +179,20 @@ class Form extends FormElement
     }
 
     /**
+     * Funkcja zbiera do jednej tablicy validRules ze wszystkich obiektów i zwraca je jako JSON
+     * @return string
+     */
+    public function getValidation()
+    {
+        $rules = [];
+        $elementRules = $this->getElementValidRules($this);
+        if(!empty($elementRules)){
+            $rules['rules'] = $elementRules;
+        }
+        return json_encode($rules);
+    }
+
+    /**
      * @param Form | FieldSet $obj
      */
     private function deleteSubmits($obj)
@@ -201,5 +216,26 @@ class Form extends FormElement
             }
         }
         $obj->reindexElements();
+    }
+
+    /**
+     * Funkcja rekurencyjna zwracająca zmergowaną tablice wszystkich validRules w wszystkich elementów formularza..
+     *
+     * @param FormInterface $obj
+     * @return array
+     */
+    private function getElementValidRules($obj)
+    {
+        $rules = [];
+        foreach($obj->getElements() as $element){
+            if($element instanceof FieldSet){
+                $rules = array_merge($rules, $this->getElementValidRules($element));
+                continue;
+            }
+            if(!empty($element->getValidRules())){
+                $rules[$element->getName()] = $element->getValidRules();
+            }
+        }
+        return $rules;
     }
 }

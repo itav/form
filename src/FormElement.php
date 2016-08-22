@@ -2,12 +2,15 @@
 
 namespace Itav\Component\Form;
 
-class FormElement {
+class FormElement implements FormElementInterface
+{
 
     protected $id;
     protected $class;
+    protected $name;
     protected $attributes;
-    protected $template = 'formelement.tpl';
+    protected $validRules = [];
+    protected $template = 'formelement.twig';
     
     
     public function getId() {
@@ -56,4 +59,48 @@ class FormElement {
         return $this;
     }
 
+    public function setRequired()
+    {
+        $this->validRules['required'] = true;
+        return $this;
+    }
+
+    public function setMin($min)
+    {
+        $this->validRules['minlength'] = $min;
+        return $this;
+    }
+
+    public function setMax($max)
+    {
+
+        $this->validRules['maxlength'] = $max;
+        return $this;
+    }
+
+    public function getValidRules()
+    {
+        return $this->validRules;
+    }
+
+    /**
+     * @param array $validRules
+     * @return $this
+     */
+    public function addCustomValidRules($validRules)
+    {
+        $this->validRules = array_merge($this->validRules, $validRules);
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
 }

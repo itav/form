@@ -8,7 +8,6 @@ class Button extends FormElement {
     const TYPE_BUTTON = 'button';
     const TYPE_RESET = 'reset';
 
-    private $name;
     private $value;
     private $type;
     private $label;
@@ -26,12 +25,8 @@ class Button extends FormElement {
         $this->type = ($type) ? $type : self::TYPE_SUBMIT;
         $this->value = $value;
         $this->label = ($label) ? $label : (($name) ? $name : $this->type);
-        $this->template = 'button.tpl';
+        $this->template = 'button.twig';
         
-    }
-
-    public function getName() {
-        return $this->name;
     }
 
     public function getValue() {
@@ -60,11 +55,6 @@ class Button extends FormElement {
 
     public function getOnblur() {
         return $this->onblur;
-    }
-
-    public function setName($name) {
-        $this->name = $name;
-        return $this;
     }
 
     public function setValue($value) {

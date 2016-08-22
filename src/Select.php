@@ -4,7 +4,6 @@ namespace Itav\Component\Form;
 
 class Select extends FormElement {
 
-    private $name;
     private $label;
     private $size;
     private $multiple;
@@ -26,14 +25,10 @@ class Select extends FormElement {
         $this->name = $name;
         $this->options = $options;
         $this->id = $name;
-        $this->template = 'select.tpl';
-        $this->templateLabel = 'label.tpl';
-        $this->templateWidget = 'input_widget.tpl';
+        $this->template = 'select.twig';
+        $this->templateLabel = 'label.twig';
+        $this->templateWidget = 'select_widget.twig';
     }    
-
-    public function getName() {
-        return $this->name;
-    }
 
     public function getLabel() {
         return $this->label;
@@ -41,11 +36,6 @@ class Select extends FormElement {
 
     public function getOptions() {
         return $this->options;
-    }
-
-    public function setName($name) {
-        $this->name = $name;
-        return $this;
     }
 
     public function setLabel($label) {
@@ -109,6 +99,28 @@ class Select extends FormElement {
 
     public function setOnchange($onchange) {
         $this->onchange = $onchange;
+        return $this;
+    }
+
+    public function getTemplateLabel()
+    {
+        return $this->templateLabel;
+    }
+
+    public function setTemplateLabel($templateLabel)
+    {
+        $this->templateLabel = $templateLabel;
+        return $this;
+    }
+
+    public function getTemplateWidget()
+    {
+        return $this->templateWidget;
+    }
+
+    public function setTemplateWidget($templateWidget)
+    {
+        $this->templateWidget = $templateWidget;
         return $this;
     }
 

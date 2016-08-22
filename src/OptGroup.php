@@ -15,7 +15,7 @@ class OptGroup extends FormElement
     public function __construct($label = null, $options = null) {
         $this->label = $label;
         $this->options = $options;
-        $this->template = 'optgroup.tpl';
+        $this->template = 'optgroup.twig';
     }    
 
 

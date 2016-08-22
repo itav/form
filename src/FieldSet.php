@@ -2,19 +2,31 @@
 
 namespace Itav\Component\Form;
 
-class FieldSet extends FormElement {
+class FieldSet extends FormElement implements FormElementInterface, FormInterface
+{
 
+    /**
+     * @var FormElementInterface[]
+     */
     private $elements = [];
     
     public function __construct()
     {
-        $this->template = 'fieldset.tpl';
+        $this->template = 'fieldset.twig';
     }
 
+    /**
+     * @return FormElementInterface[]
+     */
     public function getElements() {
         return $this->elements;
     }
 
+    /**
+     * @param FormElementInterface $element
+     * @param string $index
+     * @return $this
+     */
     public function addElement($element, $index = null) {
 
         if ($index) {
@@ -37,9 +49,13 @@ class FieldSet extends FormElement {
     public function reindexElements()
     {
         $this->elements = array_values($this->elements);
-    }    
+    }
 
-    public function setElements(array $elements) {
+    /**
+     * @param FormElementInterface[] $elements
+     * @return $this
+     */
+    public function setElements($elements) {
         $this->elements = $elements;
         return $this;
     }

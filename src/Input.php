@@ -18,7 +18,6 @@ class Input extends FormElement
 
     private $label;
     private $type;
-    private $name;
     private $value;
     private $checked;
     private $disabled;
@@ -46,9 +45,9 @@ class Input extends FormElement
         $this->type = $type;
         $this->value = $value;
         $this->id = $name;
-        $this->template = 'input.tpl';
-        $this->templateLabel = 'label.tpl';
-        $this->templateWidget = 'input_widget.tpl';
+        $this->template = 'input.twig';
+        $this->templateLabel = 'label.twig';
+        $this->templateWidget = 'input_widget.twig';
     }
     
     public function getLabel()
@@ -65,11 +64,6 @@ class Input extends FormElement
     public function getType()
     {
         return $this->type;
-    }
-
-    public function getName()
-    {
-        return $this->name;
     }
 
     public function getValue()
@@ -100,6 +94,12 @@ class Input extends FormElement
     public function getMaxlength()
     {
         return $this->maxlength;
+    }
+
+    public function setMaxlength($maxlength)
+    {
+        $this->maxlength = $maxlength;
+        return $this;
     }
 
     public function getSrc()
@@ -163,12 +163,6 @@ class Input extends FormElement
         return $this;
     }
 
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
     public function setValue($value)
     {
         $this->value = $value;
@@ -196,12 +190,6 @@ class Input extends FormElement
     public function setSize($size)
     {
         $this->size = $size;
-        return $this;
-    }
-
-    public function setMaxlength($maxlength)
-    {
-        $this->maxlength = $maxlength;
         return $this;
     }
 
@@ -268,6 +256,28 @@ class Input extends FormElement
     public function setAccept($accept)
     {
         $this->accept = $accept;
+        return $this;
+    }
+
+    public function getTemplateLabel()
+    {
+        return $this->templateLabel;
+    }
+
+    public function setTemplateLabel($templateLabel)
+    {
+        $this->templateLabel = $templateLabel;
+        return $this;
+    }
+
+    public function getTemplateWidget()
+    {
+        return $this->templateWidget;
+    }
+
+    public function setTemplateWidget($templateWidget)
+    {
+        $this->templateWidget = $templateWidget;
         return $this;
     }
 

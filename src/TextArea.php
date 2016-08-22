@@ -5,7 +5,6 @@ namespace Itav\Component\Form;
 class TextArea extends FormElement {
 
     private $label;
-    private $name;
     private $value;
     private $rows;
     private $cols;
@@ -25,9 +24,9 @@ class TextArea extends FormElement {
         $this->name = $name;
         $this->value = $value;
         $this->id = $name;
-        $this->template = 'textarea.tpl';
-        $this->templateLabel = 'label.tpl';
-        $this->templateWidget = 'input_widget.tpl';
+        $this->template = 'textarea.twig';
+        $this->templateLabel = 'label.twig';
+        $this->templateWidget = 'textarea_widget.twig';
     }
     
     public function getLabel()
@@ -39,10 +38,6 @@ class TextArea extends FormElement {
     {
         $this->label = $label;
         return $this;
-    }
-
-    public function getName() {
-        return $this->name;
     }
 
     public function getValue()
@@ -96,11 +91,6 @@ class TextArea extends FormElement {
         return $this->onchange;
     }
 
-    public function setName($name) {
-        $this->name = $name;
-        return $this;
-    }
-
     public function setRows($rows) {
         $this->rows = $rows;
         return $this;
@@ -148,6 +138,28 @@ class TextArea extends FormElement {
 
     public function setOnchange($onchange) {
         $this->onchange = $onchange;
+        return $this;
+    }
+
+    public function getTemplateLabel()
+    {
+        return $this->templateLabel;
+    }
+
+    public function setTemplateLabel($templateLabel)
+    {
+        $this->templateLabel = $templateLabel;
+        return $this;
+    }
+
+    public function getTemplateWidget()
+    {
+        return $this->templateWidget;
+    }
+
+    public function setTemplateWidget($templateWidget)
+    {
+        $this->templateWidget = $templateWidget;
         return $this;
     }
 

@@ -13,7 +13,7 @@ class Option extends FormElement {
         $this->label = $label;
         $this->value = $value;
         $this->selected = $selected;
-        $this->template = 'option.tpl';
+        $this->template = 'option.twig';
     }
 
     public function getLabel() {
