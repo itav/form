@@ -19,4 +19,8 @@ interface FormInterface
      * @return self
      */
     public function setElements($elements);
+    /**
+     * @return bool
+     */
+    public function isValid();
 }

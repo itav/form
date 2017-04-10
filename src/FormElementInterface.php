@@ -37,4 +37,8 @@ interface FormElementInterface {
     public function getName();
 
     public function setName($name);
+
+    public function getError();
+
+    public function setError($error);
 }

@@ -1,3 +1,4 @@
+{% if data.error is defined %}<span class="error">{{ data.error }}</span>{% endif %}
 <label {% if data.id is defined %} for="{{ data.id }}" {% elseif data.name is defined %} for="{{ data.name }}" {% endif %}>
     {% if data.label is defined %} {{ data.label }}{% endif %}
 </label>

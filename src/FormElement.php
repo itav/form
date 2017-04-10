@@ -8,6 +8,7 @@ class FormElement implements FormElementInterface
     protected $id;
     protected $class;
     protected $name;
+    protected $error;
     protected $attributes;
     protected $validRules = [];
     protected $template = 'formelement.twig';
@@ -101,6 +102,17 @@ class FormElement implements FormElementInterface
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    public function setError($error)
+    {
+        $this->error = $error;
         return $this;
     }
 }

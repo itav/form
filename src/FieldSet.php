@@ -60,4 +60,24 @@ class FieldSet extends FormElement implements FormElementInterface, FormInterfac
         return $this;
     }
 
+    public function isValid()
+    {
+        if (isset($this->error)) {
+            return (bool)$this->error;
+        }
+        foreach ($this->elements as $element) {
+            if ($element instanceof FormInterface) {
+                if (!$element->isValid()) {
+                    $this->error = true;
+                    return false;
+                }
+            }
+            if ((bool)$element->getError()) {
+                $this->error = true;
+                return false;
+            }
+        }
+        $this->error = false;
+        return true;
+    }
 }

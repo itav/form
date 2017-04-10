@@ -118,11 +118,18 @@ class Form extends FormElement implements FormElementInterface, FormInterface
     {
         //Add form to form
         if ($element instanceof Form) {
-            foreach ($element->getElements() as $key => $element) {
-                if(!array_key_exists($key, $this->elements)){
-                    $this->elements[$key] = $element;
+            //add element as Filedset
+            if ($index) {
+                $fs = new FieldSet();
+                foreach ($element->getElements() as $key => $elem) {
+                    $fs->addElement($elem, $key);
                 }
-                $this->elements[] = $element;
+                $this->elements[$index] = $fs;
+                return $this;
+            }
+            //add element as normal
+            foreach ($element->getElements() as $key => $elem) {
+                $this->elements[$key] = $elem;
             }
             return $this;
         }
@@ -186,7 +193,7 @@ class Form extends FormElement implements FormElementInterface, FormInterface
     {
         $rules = [];
         $elementRules = $this->getElementValidRules($this);
-        if(!empty($elementRules)){
+        if (!empty($elementRules)) {
             $rules['rules'] = $elementRules;
         }
         return json_encode($rules);
@@ -215,7 +222,6 @@ class Form extends FormElement implements FormElementInterface, FormInterface
                 $this->deleteSubmits($element);
             }
         }
-        $obj->reindexElements();
     }
 
     /**
@@ -227,15 +233,36 @@ class Form extends FormElement implements FormElementInterface, FormInterface
     private function getElementValidRules($obj)
     {
         $rules = [];
-        foreach($obj->getElements() as $element){
-            if($element instanceof FieldSet){
+        foreach ($obj->getElements() as $element) {
+            if ($element instanceof FieldSet) {
                 $rules = array_merge($rules, $this->getElementValidRules($element));
                 continue;
             }
-            if(!empty($element->getValidRules())){
+            if (!empty($element->getValidRules())) {
                 $rules[$element->getName()] = $element->getValidRules();
             }
         }
         return $rules;
+    }
+
+    public function isValid()
+    {
+        if (isset($this->error)) {
+            return (bool)$this->error;
+        }
+        foreach ($this->elements as $element) {
+            if ($element instanceof FormInterface) {
+                if (!$element->isValid()) {
+                    $this->error = true;
+                    return false;
+                }
+            }
+            if ((bool)$element->getError()) {
+                $this->error = true;
+                return false;
+            }
+        }
+        $this->error = false;
+        return true;
     }
 }
